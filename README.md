@@ -1,4 +1,4 @@
-# AI PR Reviewer (React + Laravel)
+# AI PR Reviewer Suppoert for (React , Laravel)
 
 Reusable GitHub Actions that provide AI-powered PR reviews for React/JavaScript and Laravel/PHP.
 
