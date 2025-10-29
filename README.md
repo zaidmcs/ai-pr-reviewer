@@ -33,8 +33,14 @@ Quick links
 1) Create a secret `GROQ_API_KEY` in your repo (Settings → Secrets and variables → Actions → New repository secret).
 2) Install the workflows automatically:
 
+Primary (CDN):
 ```bash path=null start=null
-curl -fsSL https://raw.githubusercontent.com/zaidmcs/ai-pr-reviewer/main/install.sh | bash -s -- zaidmcs/ai-pr-reviewer auto
+curl -fsSL https://cdn.jsdelivr.net/gh/zaidmcs/ai-pr-reviewer@main/install.sh | bash -s -- zaidmcs/ai-pr-reviewer auto
+```
+
+Fallback (GitHub CLI):
+```bash path=null start=null
+gh api repos/zaidmcs/ai-pr-reviewer/contents/install.sh -H 'Accept: application/vnd.github.v3.raw' | bash -s -- zaidmcs/ai-pr-reviewer auto
 ```
 
 3) Open a PR. You’ll get an automated review comment. Mention `@ai-reviewer` in PR comments to ask follow‑ups.
@@ -144,6 +150,7 @@ jobs:
 - No comment on PR: check Actions logs for the “AI PR Review” workflow; ensure `GROQ_API_KEY` is set
 - `@ai-reviewer` not responding: verify the comment workflow ran and that you commented on a PR (not an issue)
 - Rate limits: if the AI call is skipped, static checks still run and post a comment
+- curl 429 on install: use the CDN command above or the GitHub CLI fallback
 
 ## 🔐 Privacy & Security
 - No GitHub App required; runs entirely in your repository’s Actions
