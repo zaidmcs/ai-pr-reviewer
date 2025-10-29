@@ -1,4 +1,4 @@
-# AI PR Reviewer (React + Laravel)
+# AI PR Reviewer Suppoert for (React , Laravel)
 
 Drop-in GitHub Actions that review your pull requests automatically with static checks and AI (React/JS and Laravel/PHP). No apps to install.
 
