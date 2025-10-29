@@ -1,15 +1,36 @@
-# AI PR Reviewer Suppoert for (React , Laravel)
+<div align="center">
 
-Drop-in GitHub Actions that review your pull requests automatically with static checks and AI (React/JS and Laravel/PHP). No apps to install.
+# 🤖 AI PR Reviewer
 
-Why use this
-- One action for multiple stacks: React + Laravel
-- Beginner-friendly: copy–paste two small workflows
-- Free to run: uses Groq’s free API; no third‑party GitHub App
-- Private by default: only PR diffs are sent to the AI API
+Reusable GitHub Actions for automatic, AI‑powered code reviews in React/JavaScript and Laravel/PHP.
 
-Quick start (2 minutes)
-1) Create a secret GROQ_API_KEY in your repo (Settings → Secrets and variables → Actions → New repository secret)
+<a href="https://github.com/zaidmcs/ai-pr-reviewer"><img alt="version" src="https://img.shields.io/github/v/tag/zaidmcs/ai-pr-reviewer?label=version&sort=semver"></a>
+<a href="#license"><img alt="license" src="https://img.shields.io/badge/License-MIT-green.svg"></a>
+<img alt="stacks" src="https://img.shields.io/badge/Stacks-React%20%2B%20Laravel-blueviolet">
+<img alt="gh actions" src="https://img.shields.io/badge/GitHub%20Actions-Ready-2088FF?logo=github%20actions&logoColor=white">
+
+<p>
+  ⚡ Zero setup • 🔍 Static checks • 🧠 AI deep review • 💬 Interactive PR chat
+</p>
+
+</div>
+
+---
+
+- ✨ One action for multiple stacks: React + Laravel
+- 🧑‍💻 Beginner‑friendly: copy–paste two small workflow files
+- 🆓 Free to run: uses Groq’s free API; no GitHub App required
+- 🔒 Private by default: only PR diffs are sent to the AI API
+
+Quick links
+- 👉 Install now
+- ⚙️ Usage
+- ❓ FAQ
+- 🔐 Privacy
+- 🤝 Contributing
+
+## 🚀 Quick Start (2 minutes)
+1) Create a secret `GROQ_API_KEY` in your repo (Settings → Secrets and variables → Actions → New repository secret).
 2) Install the workflows automatically:
 
 ```bash path=null start=null
@@ -18,13 +39,13 @@ curl -fsSL https://raw.githubusercontent.com/zaidmcs/ai-pr-reviewer/main/install
 
 3) Open a PR. You’ll get an automated review comment. Mention `@ai-reviewer` in PR comments to ask follow‑ups.
 
-Choose your language(s)
+## 🧩 Language selection
 - Auto (default): detects changed files and runs React reviewer for JS/TS and Laravel reviewer for PHP
 - React only: set `languages: react`
 - Laravel only: set `languages: laravel`
 
-Manual setup (copy–paste)
-Add this to .github/workflows/pr-review.yml:
+## 📦 Usage (copy–paste)
+Add this to `.github/workflows/pr-review.yml`:
 
 ```yaml path=null start=null
 name: AI PR Review
@@ -56,7 +77,7 @@ jobs:
           GITHUB_SHA: ${{ github.event.pull_request.head.sha }}
 ```
 
-Add this to .github/workflows/comment-handler.yml:
+Add this to `.github/workflows/comment-handler.yml`:
 
 ```yaml path=null start=null
 name: AI Interactive Comments
@@ -94,13 +115,16 @@ jobs:
           GITHUB_SHA: ${{ github.sha }}
 ```
 
-What you get
-- Static analysis tuned for each stack (React best practices; Laravel security and correctness)
-- AI deep analysis on changed lines only
-- One comment summarizing critical issues and grouped suggestions
-- Interactive Q&A in PR comments via `@ai-reviewer`
+## 💡 What you get
+- ⚛️ React: hooks and performance checks, JSX pitfalls, accessibility, modern JS tips
+- 🌙 Laravel: security (SQLi/XSS), correctness, mass‑assignment, transactions, error handling
+- 🧠 AI deep analysis on changed lines only
+- 🗂️ One comment summarizing critical issues and grouped suggestions
+- 💬 Interactive Q&A in PR comments via `@ai-reviewer`
 
-Configuration reference
+> Tip: Use `languages: react,laravel` to force both reviewers on mono‑repos.
+
+## ⚙️ Configuration
 - Action: `zaidmcs/ai-pr-reviewer/review@v1`
   - inputs.languages: `auto` | `react` | `laravel` (default: `auto`)
   - env.GROQ_API_KEY: your Groq API key
@@ -110,27 +134,27 @@ Configuration reference
   - inputs.comment_body: `${{ github.event.comment.body }}`
   - inputs.pr_number: `${{ github.event.issue.number }}`
 
-Get a free Groq API key
+## 🔑 Get a free Groq API key
 - Go to https://console.groq.com → API Keys → Create key
 - Add it as `GROQ_API_KEY` in your repo’s Actions secrets
 
-Troubleshooting
+## 🧰 Troubleshooting
 - No comment on PR: check Actions logs for the “AI PR Review” workflow; ensure `GROQ_API_KEY` is set
 - `@ai-reviewer` not responding: verify the comment workflow ran and that you commented on a PR (not an issue)
 - Rate limits: if the AI call is skipped, static checks still run and post a comment
 
-Privacy & security
+## 🔐 Privacy & Security
 - No GitHub App required; runs entirely in your repository’s Actions
 - Only PR diffs and small snippets are sent to the AI API
 - Groq states user prompts are not used to train their models
 
-FAQ
+## ❓ FAQ
 - Does it block merges? It exits non‑zero only when critical issues are found, so you can make it required if you want
 - Can I customize rules? Yes—open an issue or PR; per‑stack rule sets live in `scripts/`
 - Other languages? Open an issue to request a reviewer (Node backends, Python, etc.)
 
-Contributing
+## 🤝 Contributing
 PRs welcome. Please open an issue to discuss larger changes first.
 
-License
+## 📄 License
 MIT
