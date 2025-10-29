@@ -11,6 +11,7 @@ function runScript(name) {
   const scriptMap = {
     react: `${__dirname}/react-comment-handler.js`,
     laravel: `${__dirname}/comment-handler-laravel.js`,
+    swift: `${__dirname}/comment-handler-swift.js`,
   };
   const path = scriptMap[name];
   if (!path) return 0;
@@ -23,8 +24,8 @@ function runScript(name) {
 
   let toRun = langs;
   if (langs.includes('auto')) {
-    // In auto mode, run both; handlers are cheap and will tailor context
-    toRun = ['react', 'laravel'];
+    // In auto mode, run all; handlers are cheap and will tailor context
+    toRun = ['react', 'laravel', 'swift'];
   }
 
   let posted = false;

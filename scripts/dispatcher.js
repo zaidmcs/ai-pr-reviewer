@@ -15,7 +15,7 @@ function detectLanguagesFromPR() {
 
     // Basic detection by env diff via GitHub API is inside scripts; here we do a heuristic by repo tree later
     // Keep it simple: let each reviewer filter its own files. Just return both to cover cases.
-    return ['react', 'laravel'];
+    return ['react', 'laravel', 'swift'];
   } catch {
     return [];
   }
@@ -25,6 +25,7 @@ function runScript(name) {
   const scriptMap = {
     react: `${__dirname}/react-reviewer.js`,
     laravel: `${__dirname}/laravel-reviewer.js`,
+    swift: `${__dirname}/swift-reviewer.js`,
   };
   const path = scriptMap[name];
   if (!path) return 0;

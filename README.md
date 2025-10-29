@@ -2,11 +2,11 @@
 
 # 🤖 AI PR Reviewer
 
-Reusable GitHub Actions for automatic, AI‑powered code reviews in React/JavaScript and Laravel/PHP.
+Reusable GitHub Actions for automatic, AI‑powered code reviews in React/JavaScript, Laravel/PHP, and Swift/iOS.
 
 <a href="https://github.com/zaidmcs/ai-pr-reviewer"><img alt="version" src="https://img.shields.io/github/v/tag/zaidmcs/ai-pr-reviewer?label=version&sort=semver"></a>
 <a href="#license"><img alt="license" src="https://img.shields.io/badge/License-MIT-green.svg"></a>
-<img alt="stacks" src="https://img.shields.io/badge/Stacks-React%20%2B%20Laravel-blueviolet">
+<img alt="stacks" src="https://img.shields.io/badge/Stacks-React%20%2B%20Laravel%20%2B%20Swift-blueviolet">
 <img alt="gh actions" src="https://img.shields.io/badge/GitHub%20Actions-Ready-2088FF?logo=github%20actions&logoColor=white">
 
 <p>
@@ -17,7 +17,7 @@ Reusable GitHub Actions for automatic, AI‑powered code reviews in React/JavaSc
 
 ---
 
-- ✨ One action for multiple stacks: React + Laravel
+- ✨ One action for multiple stacks: React + Laravel + Swift
 - 🧑‍💻 Beginner‑friendly: copy–paste two small workflow files
 - 🆓 Free to run: uses Groq’s free API; no GitHub App required
 - 🔒 Private by default: only PR diffs are sent to the AI API
@@ -40,9 +40,10 @@ curl -fsSL https://raw.githubusercontent.com/zaidmcs/ai-pr-reviewer/main/install
 3) Open a PR. You’ll get an automated review comment. Mention `@ai-reviewer` in PR comments to ask follow‑ups.
 
 ## 🧩 Language selection
-- Auto (default): detects changed files and runs React reviewer for JS/TS and Laravel reviewer for PHP
+- Auto (default): detects changed files and runs React reviewer for JS/TS, Laravel reviewer for PHP, and Swift reviewer for .swift
 - React only: set `languages: react`
 - Laravel only: set `languages: laravel`
+- Swift only: set `languages: swift`
 
 ## 📦 Usage (copy–paste)
 Add this to `.github/workflows/pr-review.yml`:
@@ -118,15 +119,16 @@ jobs:
 ## 💡 What you get
 - ⚛️ React: hooks and performance checks, JSX pitfalls, accessibility, modern JS tips
 - 🌙 Laravel: security (SQLi/XSS), correctness, mass‑assignment, transactions, error handling
+- 🍎 Swift: safety (force unwrap/cast/try), retain cycles, main‑thread UI, async/await, error handling
 - 🧠 AI deep analysis on changed lines only
 - 🗂️ One comment summarizing critical issues and grouped suggestions
 - 💬 Interactive Q&A in PR comments via `@ai-reviewer`
 
-> Tip: Use `languages: react,laravel` to force both reviewers on mono‑repos.
+> Tip: Use `languages: react,laravel,swift` to force all reviewers on mono‑repos.
 
 ## ⚙️ Configuration
 - Action: `zaidmcs/ai-pr-reviewer/review@v1`
-  - inputs.languages: `auto` | `react` | `laravel` (default: `auto`)
+  - inputs.languages: `auto` | `react` | `laravel` | `swift` (default: `auto`)
   - env.GROQ_API_KEY: your Groq API key
   - env.GITHUB_TOKEN: provided by GitHub Actions `${{ secrets.GITHUB_TOKEN }}`
 - Action: `zaidmcs/ai-pr-reviewer/comment@v1`
