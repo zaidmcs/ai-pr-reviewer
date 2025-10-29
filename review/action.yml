@@ -1,0 +1,32 @@
+name: AI PR Review
+description: Run static + AI PR review for selected languages (react, laravel, or auto)
+inputs:
+  languages:
+    description: Comma-separated languages to run (react, laravel) or 'auto'
+    required: false
+    default: auto
+  groq_api_key:
+    description: Optional GROQ API key (prefer passing via env GROQ_API_KEY)
+    required: false
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - name: Install dependencies
+      shell: bash
+      run: |
+        npm init -y >/dev/null 2>&1 || true
+        npm i --no-audit --no-fund @octokit/rest@20.1.1
+    - name: Run reviewer dispatcher
+      shell: bash
+      env:
+        LANGUAGES: ${{ inputs.languages }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+        GROQ_API_KEY: ${{ inputs.groq_api_key || env.GROQ_API_KEY }}
+        GITHUB_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
+        GITHUB_SHA: ${{ env.GITHUB_SHA }}
+        GITHUB_EVENT_PATH: ${{ env.GITHUB_EVENT_PATH }}
+      run: node $GITHUB_ACTION_PATH/../scripts/dispatcher.js

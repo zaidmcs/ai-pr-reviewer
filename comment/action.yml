@@ -1,0 +1,40 @@
+name: AI PR Comment Handler
+description: Reply to PR comments with AI, tailored per language (react, laravel, or auto)
+inputs:
+  languages:
+    description: Comma-separated languages to enable (react, laravel) or 'auto'
+    required: false
+    default: auto
+  groq_api_key:
+    description: Optional GROQ API key (prefer passing via env GROQ_API_KEY)
+    required: false
+  comment_body:
+    description: The body of the issue comment
+    required: true
+  pr_number:
+    description: The pull request number
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - name: Install dependencies
+      shell: bash
+      run: |
+        npm init -y >/dev/null 2>&1 || true
+        npm i --no-audit --no-fund @octokit/rest@20.1.1
+    - name: Run comment dispatcher
+      shell: bash
+      env:
+        LANGUAGES: ${{ inputs.languages }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+        GROQ_API_KEY: ${{ inputs.groq_api_key || env.GROQ_API_KEY }}
+        COMMENT_BODY: ${{ inputs.comment_body }}
+        PR_NUMBER: ${{ inputs.pr_number }}
+        GITHUB_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
+        GITHUB_SHA: ${{ env.GITHUB_SHA }}
+        GITHUB_EVENT_PATH: ${{ env.GITHUB_EVENT_PATH }}
+      run: node $GITHUB_ACTION_PATH/../scripts/comment-dispatcher.js
